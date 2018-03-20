@@ -17,7 +17,9 @@ import {NgxSocialLoginModule} from './ngx-social-login';
                     client_id: 'YOUR_CLIENT_ID'
                 },
                 facebook: {
-                    appId: 'YOUR_APP_ID'
+                    initOptions: {
+                        appId: 'YOUR_APP_ID'
+                    }
                 }
             }
         )

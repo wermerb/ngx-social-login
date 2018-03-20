@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {Provider, SocialUser} from '../models';
 import {of} from 'rxjs/observable/of';
 import {FacebookProviderConfig} from '../models/config/facebook-provider-config';
+import {fromPromise} from 'rxjs/observable/fromPromise';
 
 declare const FB: any;
 
@@ -10,29 +11,37 @@ export class FacebookProvider extends OauthProvider {
 
     constructor(private _config: FacebookProviderConfig) {
         super(Provider.FACEBOOK, '//connect.facebook.net/en_US/sdk.js', () => {
-            const config = this._config.version ? this._config : {...this._config, ...{version: 'v2.9'}};
+            const initConfig = this._config.initOptions;
+            const config = initConfig.version ? initConfig : {...initConfig, ...{version: 'v2.9'}};
             FB.init(config);
         });
     }
 
     login(): Observable<SocialUser> {
-        return of(
-            FB.login((response: any) => {
-                if (response.authResponse) {
-                    const authResponse = response.authResponse;
-                    FB.api('/me?fields=name,email,picture,first_name,last_name', (fbUser: any) => {
-                        return {
-                            id: fbUser.id,
-                            name: fbUser.name,
-                            email: fbUser.email,
-                            profileImg: `https://graph.facebook.com/${fbUser.id}/picture?type=normal`,
-                            firstName: fbUser.first_name,
-                            lastName: fbUser.last_name,
-                            accessToken: authResponse.accessToken,
-                        } as SocialUser;
-                    });
-                }
-            }, this._config)
+        return fromPromise(
+            new Promise((resolve) => {
+                let config: any = this._config.loginOptions;
+                config = config.profile_selector_ids ?
+                    {...config, ...{profile_selector_ids: config.profile_selector_ids.join(',')}} : config;
+                config = config.scope ? {...config, ...{scope: config.scope.join(',')}} : config;
+
+                FB.login((response: any) => {
+                    if (response.authResponse) {
+                        const authResponse = response.authResponse;
+                        FB.api('/me?fields=name,email,picture,first_name,last_name', (fbUser: any) => {
+                            resolve({
+                                id: fbUser.id,
+                                name: fbUser.name,
+                                email: fbUser.email,
+                                profileImg: `https://graph.facebook.com/${fbUser.id}/picture?type=normal`,
+                                firstName: fbUser.first_name,
+                                lastName: fbUser.last_name,
+                                accessToken: authResponse.accessToken,
+                            } as SocialUser);
+                        });
+                    }
+                }, config);
+            })
         );
     }
 

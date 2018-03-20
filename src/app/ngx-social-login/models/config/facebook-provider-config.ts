@@ -1,17 +1,31 @@
 export interface FacebookProviderConfig {
 
-    appId: string;
+    initOptions: {
+        appId: string;
 
-    version?: string;
+        version?: string;
 
-    cookie?: boolean;
+        cookie?: boolean;
 
-    status?: boolean;
+        status?: boolean;
 
-    xfbml?: boolean;
+        xfbml?: boolean;
 
-    frictionlessRequests?: boolean;
+        frictionlessRequests?: boolean;
 
-    hideFlashCallback?: () => void;
+        hideFlashCallback?: () => void;
+    };
+
+    loginOptions?: {
+        auth_type?: string;
+
+        scope?: Array<string>;
+
+        return_scopes?: boolean;
+
+        enable_profile_selector?: boolean;
+
+        profile_selector_ids?: Array<string>;
+    };
 
 }

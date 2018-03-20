@@ -21,9 +21,12 @@ yarn add ngx-social-login
 Import `NgxSocialLoginModule` into your `Module`.
 You can provide any configuration what is supported by Oauth providers.
 
-Google: https://developers.google.com/identity/sign-in/web/reference#gapiauth2clientconfig
+Google: 
+* https://developers.google.com/identity/sign-in/web/reference#gapiauth2clientconfig
 
-Facebook: https://developers.facebook.com/docs/javascript/reference/FB.init/v2.12
+Facebook: 
+* https://developers.facebook.com/docs/javascript/reference/FB.init/v2.12
+* https://developers.facebook.com/docs/reference/javascript/FB.login/v2.12#params
 
 ```javascript
 @NgModule({
@@ -36,7 +39,9 @@ Facebook: https://developers.facebook.com/docs/javascript/reference/FB.init/v2.1
                     client_id: 'YOUR_CLIENT_ID'
                 },
                 facebook: {
-                    appId: 'YOUR_APP_ID'
+                    initOptions: {
+                        appId: 'YOUR_APP_ID'
+                    }
                 }
             }
         )
