@@ -1,8 +1,8 @@
 # NgxSocialLogin
 
-This module intention is to provide an easy to use social login service, which can be integrate easily in any environment.
+This module's intention is to provide an easy to use social login service, which can be integrated easily into any environment.
 
-It has been inspired by [Angularx Social Login](https://github.com/abacritt/angularx-social-login)
+This project has been inspired by [Angularx Social Login](https://github.com/abacritt/angularx-social-login)
 
 ## Getting started
 
@@ -19,7 +19,7 @@ yarn add ngx-social-login
 ### Import the module
 
 Import `NgxSocialLoginModule` into your `Module`.
-You can provide any configuration what is supported by Oauth providers.
+You can provide any configuration that is supported by Oauth providers.
 
 Google: 
 * https://developers.google.com/identity/sign-in/web/reference#gapiauth2clientconfig
