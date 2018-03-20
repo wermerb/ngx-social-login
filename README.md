@@ -56,11 +56,6 @@ export class AuthModule {
 ### How to use
 
 ```javascript
-
-import { AuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
-
-
 @Component({
   selector: 'app-login-page',
   templateUrl: './app-login-page.component.html',
