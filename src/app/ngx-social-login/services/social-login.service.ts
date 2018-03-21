@@ -8,6 +8,7 @@ import {FacebookProvider} from '../providers/facebook-provider';
 import {FacebookProviderConfig} from '../models/config/facebook-provider-config';
 import {GoogleProviderConfig} from '../models/config/google-provider-config';
 import {GoogleProvider} from '../providers/google-provider';
+import {of} from 'rxjs/observable/of';
 
 @Injectable()
 export class SocialLoginService {
@@ -26,12 +27,12 @@ export class SocialLoginService {
     login(provider: Provider): Observable<SocialUser> {
         this._providerInUse = provider;
         const oauthProvider = this._providers[provider];
-        return oauthProvider.login();
+        return oauthProvider ? oauthProvider.login() : of();
     }
 
     logout(): Observable<SocialUser> {
         const oauthProvider = this._providers[this._providerInUse];
-        return oauthProvider.logout();
+        return oauthProvider ? oauthProvider.logout() : of();
     }
 
     private oauthProviderFactory(provider: Provider, config: GoogleProviderConfig | FacebookProviderConfig): OauthProvider {
