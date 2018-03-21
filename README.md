@@ -1,4 +1,4 @@
-# NgxSocialLogin
+# NgxSocialLogin [![npm version](https://badge.fury.io/js/ngx-social-login.svg)](https://badge.fury.io/js/ngx-social-login) [![bitHound Code](https://www.bithound.io/github/wermerb/ngx-social-login/badges/code.svg)](https://www.bithound.io/github/wermerb/ngx-social-login)
 
 This module's intention is to provide an easy to use social login service, which can be integrated easily into any environment.
 
