@@ -9,11 +9,11 @@ This project has been inspired by [Angularx Social Login](https://github.com/aba
 ### Install via npm/yarn 
 
 ```sh
-...
+npm install --save ngx-social-login
 ```
 
 ```sh
-...
+yarn add ngx-social-login
 ```
 
 ### Import the module
