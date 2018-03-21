@@ -4,7 +4,7 @@ export interface GoogleProviderConfig {
 
     cookie_policy?: string;
 
-    scope?: Array<string>;
+    scope?: string;
 
     fetch_basic_profile?: boolean;
 

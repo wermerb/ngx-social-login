@@ -14,7 +14,7 @@ export class GoogleProvider extends OauthProvider {
     constructor(config: GoogleProviderConfig) {
         super(Provider.GOOGLE, '//apis.google.com/js/platform.js', () => {
             gapi.load('auth2', () => {
-                const conf = !config.scope ? {...config, ...{scope: 'email'}} : {...config, ...{scope: config.scope.join(' ')}};
+                const conf = !config.scope ? {...config, ...{scope: 'email'}} : config;
                 gapi.auth2.init(conf).then(auth => this._googleAuth = auth);
             });
         });

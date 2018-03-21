@@ -20,11 +20,6 @@ export class FacebookProvider extends OauthProvider {
     login(): Observable<SocialUser> {
         return fromPromise(
             new Promise((resolve) => {
-                let config: any = this._config.loginOptions;
-                config = config.profile_selector_ids ?
-                    {...config, ...{profile_selector_ids: config.profile_selector_ids.join(',')}} : config;
-                config = config.scope ? {...config, ...{scope: config.scope.join(',')}} : config;
-
                 FB.login((response: any) => {
                     if (response.authResponse) {
                         const authResponse = response.authResponse;
@@ -40,7 +35,7 @@ export class FacebookProvider extends OauthProvider {
                             } as SocialUser);
                         });
                     }
-                }, config);
+                }, this._config.loginOptions);
             })
         );
     }
