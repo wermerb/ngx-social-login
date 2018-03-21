@@ -21,7 +21,7 @@ export class GoogleProvider extends OauthProvider {
     }
 
     login(): Observable<SocialUser> {
-        return fromPromise(this._googleAuth.signIn()).pipe(
+        return fromPromise(this._googleAuth.signIn({prompt: 'select_account'})).pipe(
             map(() => {
                 const profile = this._googleAuth.currentUser.get().getBasicProfile();
                 const accessToken = this._googleAuth.currentUser.get().getAuthResponse(true).access_token;
