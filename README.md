@@ -82,3 +82,12 @@ export class LoginPageComponent {
 
 }
 ```
+
+### Demo
+```bash
+git clone https://github.com/wermerb/ngx-social-login.git
+cd ngx-social-login
+Add your Google and/or Facebook client id to AppModule's config
+yarn / npm install
+ng serve
+```
