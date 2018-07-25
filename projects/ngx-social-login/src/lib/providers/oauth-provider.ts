@@ -1,8 +1,8 @@
-import {Observable} from 'rxjs/Observable';
-import {Provider, SocialUser} from '../models';
+import { Observable } from 'rxjs';
+import { Provider } from '../models/provider';
+import { SocialUser } from '../models/social-user';
 
 export abstract class OauthProvider {
-
     private readonly ID_PREFIX = 'social-login__';
 
     constructor(provider: Provider, src: string, onload: () => void, async = true) {
@@ -24,5 +24,4 @@ export abstract class OauthProvider {
     abstract login(): Observable<SocialUser>;
 
     abstract logout(): Observable<any>;
-
 }

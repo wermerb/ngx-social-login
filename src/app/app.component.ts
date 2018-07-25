@@ -1,17 +1,13 @@
-import {Component} from '@angular/core';
-import {SocialLoginService} from './ngx-social-login';
-import {Provider} from './ngx-social-login/models';
+import { Component } from '@angular/core';
+import { SocialLoginService, Provider } from 'ngx-social-login';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-
-    constructor(private service: SocialLoginService) {
-    }
+    constructor(private service: SocialLoginService) {}
 
     loginWithGoogle(): void {
         this.service.login(Provider.GOOGLE).subscribe(s => console.log(s));
@@ -27,5 +23,4 @@ export class AppComponent {
             error: err => console.log(err)
         });
     }
-
 }

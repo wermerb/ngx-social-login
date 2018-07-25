@@ -1,4 +1,4 @@
-# NgxSocialLogin [![npm version](https://badge.fury.io/js/ngx-social-login.svg)](https://badge.fury.io/js/ngx-social-login) [![bitHound Code](https://www.bithound.io/github/wermerb/ngx-social-login/badges/code.svg)](https://www.bithound.io/github/wermerb/ngx-social-login)
+# NgxSocialLogin [![npm version](https://badge.fury.io/js/ngx-social-login.svg)](https://badge.fury.io/js/ngx-social-login)
 
 This module's intention is to provide an easy to use social login service, which can be integrated easily into any environment.
 
@@ -6,7 +6,7 @@ This project has been inspired by [Angularx Social Login](https://github.com/aba
 
 ## Getting started
 
-### Install via npm/yarn 
+### Install via npm/yarn
 
 ```sh
 npm install --save ngx-social-login
@@ -21,12 +21,14 @@ yarn add ngx-social-login
 Import `NgxSocialLoginModule` into your `Module`.
 You can provide any configuration that is supported by Oauth providers.
 
-Google: 
-* https://developers.google.com/identity/sign-in/web/reference#gapiauth2clientconfig
+Google:
 
-Facebook: 
-* https://developers.facebook.com/docs/javascript/reference/FB.init/v2.12
-* https://developers.facebook.com/docs/reference/javascript/FB.login/v2.12#params
+-   https://developers.google.com/identity/sign-in/web/reference#gapiauth2clientconfig
+
+Facebook:
+
+-   https://developers.facebook.com/docs/javascript/reference/FB.init/v2.12
+-   https://developers.facebook.com/docs/reference/javascript/FB.login/v2.12#params
 
 ```javascript
 @NgModule({
@@ -64,15 +66,15 @@ export class AuthModule {
 export class LoginPageComponent {
 
     constructor(private _service: SocialLoginService) {}
-  
+
       loginWithFacebook(): void {
           this._service.login(Provider.FACEBOOK).subscribe(user => console.log(user));
       }
-      
+
       loginWithGoogle(): void {
           this._service.login(Provider.GOOGLE).subscribe(user => console.log(user));
       }
-  
+
       logout(): void {
           this._service.logout().subscribe({
                complete: ()=> console.log('Logout success'),
@@ -84,6 +86,7 @@ export class LoginPageComponent {
 ```
 
 ### Demo
+
 ```bash
 git clone https://github.com/wermerb/ngx-social-login.git
 cd ngx-social-login
