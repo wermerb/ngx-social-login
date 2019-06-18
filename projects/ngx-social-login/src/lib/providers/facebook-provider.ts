@@ -1,5 +1,6 @@
 import { OauthProvider } from './oauth-provider';
-import { Observable } from 'rxjs';
+import { bindCallback, Observable, of } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { FacebookProviderConfig } from '../models/config/facebook-provider-config';
 import { SocialUser } from '../models/social-user';
 import { Provider } from '../models/provider';
@@ -16,27 +17,25 @@ export class FacebookProvider extends OauthProvider {
     }
 
     login(): Observable<SocialUser> {
-        return Observable.create(observer => {
-            FB.login((response: any) => {
-                if (response.authResponse) {
-                    const authResponse = response.authResponse;
-                    FB.api('/me?fields=name,email,picture,first_name,last_name', (fbUser: any) => {
-                        observer.complete({
-                            id: fbUser.id,
-                            name: fbUser.name,
-                            email: fbUser.email,
-                            profileImg: `https://graph.facebook.com/${fbUser.id}/picture?type=normal`,
-                            firstName: fbUser.first_name,
-                            lastName: fbUser.last_name,
-                            accessToken: authResponse.accessToken
-                        } as SocialUser);
-                    });
-                }
-            }, this._config.loginOptions);
-        });
+        return bindCallback((cb) => FB.login(cb, this._config.loginOptions))().pipe(
+            mergeMap((loginResponse: any) =>
+                bindCallback((cb) => FB.api('/me?fields=name,email,picture,first_name,last_name', cb))().pipe(
+                    map((meResponse: any) => ({
+                            id: meResponse.id,
+                            name: meResponse.name,
+                            email: meResponse.email,
+                            profileImg: `https://graph.facebook.com/${meResponse.id}/picture?type=normal`,
+                            firstName: meResponse.first_name,
+                            lastName: meResponse.last_name,
+                            idToken: loginResponse.authResponse.signedRequest,
+                            accessToken: loginResponse.authResponse.accessToken
+                        } as SocialUser)
+                    ))
+            ));
     }
 
     logout(): Observable<any> {
-        return Observable.create(observer => observer.complete(FB.logout()));
+        FB.logout();
+        return of(true);
     }
 }
