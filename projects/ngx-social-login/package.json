@@ -1,6 +1,6 @@
 {
   "name": "ngx-social-login",
-  "version": "6.0.0",
+  "version": "8.0.0",
   "peerDependencies": {
     "@angular/core": ">2.0.0",
     "rxjs": ">=6.0.0",
